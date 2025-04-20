@@ -1,0 +1,40 @@
+<template>
+  <lightning-card title="Real-Time Chat" icon-name="utility:chat">
+    <div class="chat-window slds-box slds-scrollable_y" style="height: 300px">
+      <template for:each={messages} for:item="msg">
+        <div
+          key={msg.timestamp}
+          class={msg.senderClass}
+          style="
+            margin: 4px 0;
+            padding: 8px;
+            border-radius: 10px;
+            max-width: 70%;
+          "
+        >
+          <p><strong>{msg.sender}</strong></p>
+          <div class="msg-text" data-index={index} lwc:dom="manual"></div>
+          <p style="font-size: 0.75rem; color: gray; margin-top: 4px">
+            {msg.timestamp}
+          </p>
+        </div>
+      </template>
+    </div>
+
+    <lightning-input-rich-text
+      label="Message"
+      value={messageInput}
+      onchange={handleInputChange}
+      class="slds-m-top_medium"
+      placeholder="Type your message..."
+      valid-variants="base"
+      formats="bold italic underline strikethrough link"
+    ></lightning-input-rich-text>
+    <lightning-button
+      label="Send"
+      variant="brand"
+      onclick={handleSend}
+      class="slds-m-top_small"
+    ></lightning-button>
+  </lightning-card>
+</template>

@@ -1,0 +1,16 @@
+.msg {
+    background-color: #f1f0f0;
+    clear: both;
+}
+
+.msg-left {
+    float: left;
+    background-color: #e2e2e2;
+    text-align: left;
+}
+
+.msg-right {
+    float: right;
+    background-color: #dcf8c6;
+    text-align: right;
+}
