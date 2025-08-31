@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionIdentifier>aRal6kg2uBKbVPzUf8hSm2+5IK1vSJIqIBOxk9I1/pE=_3</activeVersionIdentifier>
+    <developerName>KnowledgeArticleDuplicateGenerator</developerName>
+    <masterLabel>KnowledgeArticleDuplicateGenerator</masterLabel>
+    <templateVersions>
+        <content>You are a Salesforce Knowledge Article duplicate detector.
+
+Compare the following new article with existing articles. 
+Return a JSON array of possible duplicates with a similarity score (0–100) and reasoning.
+
+New Article:
+Title: {!$Input:articleTitle}
+Body: {!$Input:articleBody}
+Existing Articles: {!$Input:matchedArticle}
+
+</content>
+        <inputs>
+            <apiName>articleTitle</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>articleTitle</masterLabel>
+            <referenceName>Input:articleTitle</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>articleBody</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>articleBody</masterLabel>
+            <referenceName>Input:articleBody</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>matchedArticle</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>matchedArticle</masterLabel>
+            <referenceName>Input:matchedArticle</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <responseFormat>JSON</responseFormat>
+        <status>Published</status>
+        <versionIdentifier>aRal6kg2uBKbVPzUf8hSm2+5IK1vSJIqIBOxk9I1/pE=_1</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a Salesforce Knowledge Article duplicate detector.
+
+Compare the following **new article** against a list of **existing articles**.  
+
+New Article:  
+Title: {!$Input:articleTitle}  
+Body: {!$Input:articleBody}  
+
+Existing Articles:  
+{!$Input:matchedArticle}  
+
+---
+
+### Task:
+1. Evaluate all existing articles for similarity with the new article.  
+2. Assign a **similarity score (0–100)** to each candidate.  
+3. Select the **single best match** (highest score).  
+4. Provide reasoning for why it is the closest match.  
+
+---
+
+### Response Format:
+Return a **strict JSON object** (not an array) with:  
+- `Id` → Salesforce Id of the best-matched existing article  
+- `SimilarityScore` → integer (0–100)  
+- `Reason` → one-sentence reasoning  
+
+Example:
+```json
+{
+ &quot;Id&quot;: &quot;ka07A0000001234&quot;,
+ &quot;SimilarityScore&quot;: 88,
+ &quot;Reason&quot;: &quot;Both articles describe login blank screen issues and troubleshooting steps.&quot;
+}
+
+</content>
+        <inputs>
+            <apiName>articleTitle</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>articleTitle</masterLabel>
+            <referenceName>Input:articleTitle</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>articleBody</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>articleBody</masterLabel>
+            <referenceName>Input:articleBody</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>matchedArticle</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>matchedArticle</masterLabel>
+            <referenceName>Input:matchedArticle</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <responseFormat>JSON</responseFormat>
+        <status>Published</status>
+        <versionIdentifier>aRal6kg2uBKbVPzUf8hSm2+5IK1vSJIqIBOxk9I1/pE=_2</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a Salesforce Knowledge Article duplicate detector.
+
+Your job is to compare a **new article** with a list of **existing articles** and determine if there is a duplicate.
+
+---
+
+### New Article
+- Title: {!$Input:articleTitle}
+- Body: {!$Input:articleBody}
+
+### Existing Articles
+{!$Input:matchedArticle}
+
+---
+
+### Evaluation Rules
+1. **Primary comparison = Article Body.** Give at least 70% weight to body similarity.  
+2. **Secondary comparison = Title.** Give at most 30% weight to title similarity.  
+3. Assign a **similarity score (0–100)**.  
+  - 100 = practically identical wording and meaning.  
+  - 90–99 = very strong overlap in meaning and troubleshooting steps.  
+  - 70–89 = partial overlap, covers similar issues but with differences.  
+  - 0–69 = weak or no overlap.  
+4. Select the **single best match** (highest score).  
+5. Provide a **clear and concise reason** for why this is the best match.  
+  - Mention if it’s because the bodies are nearly identical, or because titles and bodies both strongly align.  
+
+---
+
+### Response Format
+Return a **strict JSON object** only (no extra text, no arrays):
+
+```json
+{
+ &quot;Id&quot;: &quot;ka07A0000001234&quot;,
+ &quot;SimilarityScore&quot;: 92,
+ &quot;Reason&quot;: &quot;The bodies both describe login blank screen issues with nearly identical troubleshooting steps.&quot;
+}
+
+</content>
+        <inputs>
+            <apiName>matchedArticle</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>matchedArticle</masterLabel>
+            <referenceName>Input:matchedArticle</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>articleBody</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>articleBody</masterLabel>
+            <referenceName>Input:articleBody</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>articleTitle</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>articleTitle</masterLabel>
+            <referenceName>Input:articleTitle</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <responseFormat>JSON</responseFormat>
+        <status>Published</status>
+        <versionIdentifier>aRal6kg2uBKbVPzUf8hSm2+5IK1vSJIqIBOxk9I1/pE=_3</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>

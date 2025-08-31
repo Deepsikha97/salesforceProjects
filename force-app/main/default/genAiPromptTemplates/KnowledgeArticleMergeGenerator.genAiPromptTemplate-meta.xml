@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionIdentifier>aRal6kg2uBKbVPzUf8hSm2+5IK1vSJIqIBOxk9I1/pE=_2</activeVersionIdentifier>
+    <developerName>KnowledgeArticleMergeGenerator</developerName>
+    <masterLabel>KnowledgeArticleMergeGenerator</masterLabel>
+    <templateVersions>
+        <content>Merge the following two Salesforce Knowledge articles into one improved version. 
+Keep it concise, remove duplicates, and ensure clarity.
+
+Draft Article:
+Title: {!$Input:draftTitle}
+Body: {!$Input:draftBody}
+
+Existing Article:
+Title: {!$Input:existingTitle}
+Body: {!$Input:existingBody}
+
+Return JSON with keys:
+- title (string)
+- body (string)
+
+</content>
+        <inputs>
+            <apiName>draftTitle</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>draftTitle</masterLabel>
+            <referenceName>Input:draftTitle</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>draftBody</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>draftBody</masterLabel>
+            <referenceName>Input:draftBody</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>existingTitle</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>existingTitle</masterLabel>
+            <referenceName>Input:existingTitle</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>existingBody</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>existingBody</masterLabel>
+            <referenceName>Input:existingBody</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <responseFormat>JSON</responseFormat>
+        <status>Published</status>
+        <versionIdentifier>aRal6kg2uBKbVPzUf8hSm2+5IK1vSJIqIBOxk9I1/pE=_1</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a Salesforce Knowledge Base assistant.  
+Merge the following two Salesforce Knowledge articles into one improved version. 
+Keep it concise, remove duplicates, and ensure clarity.
+Your task is to create a professional Knowledge Article draft from the given Knowledge Articles.
+
+Requirements:
+- Generate a clear and concise **Title** .
+- Generate a well-structured **Body** (with bullet points).  
+- Keep the tone simple, business-friendly, and support-focused.  
+- Do NOT include personal or confidential data.  
+
+Draft Article:
+Title: {!$Input:draftTitle}
+Body: {!$Input:draftBody}
+
+Existing Article:
+Title: {!$Input:existingTitle}
+Body: {!$Input:existingBody}
+
+Output format (JSON):
+{
+ &quot;title&quot;: &quot;&lt;draft title&gt;&quot;,
+ &quot;body&quot;: &quot;&lt;draft body&gt;&quot;
+}
+</content>
+        <inputs>
+            <apiName>draftTitle</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>draftTitle</masterLabel>
+            <referenceName>Input:draftTitle</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>draftBody</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>draftBody</masterLabel>
+            <referenceName>Input:draftBody</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>existingTitle</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>existingTitle</masterLabel>
+            <referenceName>Input:existingTitle</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>existingBody</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>existingBody</masterLabel>
+            <referenceName>Input:existingBody</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <responseFormat>JSON</responseFormat>
+        <status>Published</status>
+        <versionIdentifier>aRal6kg2uBKbVPzUf8hSm2+5IK1vSJIqIBOxk9I1/pE=_2</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>

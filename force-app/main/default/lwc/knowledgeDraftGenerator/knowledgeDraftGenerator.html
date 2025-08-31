@@ -1,0 +1,109 @@
+<template>
+	<!-- Generate Article button shown on the record page -->
+	<lightning-button
+		label="Generate Article Draft"
+		variant="brand"
+		onclick={handleGenerate}
+		class="slds-m-bottom_medium"
+	>
+	</lightning-button>
+
+	<!-- Modal -->
+	<template if:true={isModalOpen}>
+		<section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<!-- Header -->
+				<header class="slds-modal__header">
+					<h2 class="slds-text-heading_medium">
+						Generated Knowledge Article Draft
+					</h2>
+					<lightning-button-icon
+						icon-name="utility:close"
+						alternative-text="Close"
+						variant="bare-inverse"
+						class="slds-modal__close"
+						onclick={closeModal}
+					>
+					</lightning-button-icon>
+				</header>
+
+				<!-- Body -->
+				<div class="slds-modal__content slds-p-around_medium">
+					<!-- Spinner -->
+					<template if:true={isLoading}>
+						<lightning-spinner
+							alternative-text="Loading..."
+							size="medium"
+						></lightning-spinner>
+					</template>
+
+					<!-- Draft Article (Editable fields) -->
+					<template if:true={draftArticle}>
+						<div class="slds-box slds-m-bottom_medium">
+							<lightning-input
+								type="text"
+								label="Article Title"
+								value={draftArticle.title}
+								onchange={handleTitleChange}
+							>
+							</lightning-input>
+
+							<lightning-input-rich-text
+								label="Article Body"
+								value={draftArticle.body}
+								onchange={handleBodyChange}
+								class="slds-m-top_small"
+							>
+							</lightning-input-rich-text>
+						</div>
+					</template>
+
+					<!-- Duplicate Articles -->
+					<template if:true={duplicateArticlesFound}>
+						<h3 class="slds-text-title_caps slds-m-bottom_small">
+							Possible Duplicate Articles
+						</h3>
+						<template for:each={duplicateArticles} for:item="dup">
+							<div key={dup.articleId} class="slds-box slds-m-bottom_x-small">
+								<p><strong>{dup.title}</strong></p>
+								<p>{dup.body}</p>
+							</div>
+						</template>
+					</template>
+				</div>
+
+				<!-- Footer -->
+				<footer class="slds-modal__footer">
+					<lightning-button
+						variant="neutral"
+						label="Close"
+						onclick={closeModal}
+					></lightning-button>
+					<template lwc:if={duplicateArticlesFound}>
+						<lightning-button
+							variant="destructive"
+							label="Merge with Duplicate"
+							onclick={handleMerge}
+						>
+						</lightning-button>
+                        <lightning-button
+							variant="brand"
+							label="Save Draft without Merging"
+							onclick={handleSave}
+						>
+						</lightning-button>
+
+					</template>
+					<template lwc:else>
+						<lightning-button
+							variant="brand"
+							label="Save Draft"
+							onclick={handleSave}
+						></lightning-button>
+					</template>
+				</footer>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+</template>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionIdentifier>aRal6kg2uBKbVPzUf8hSm2+5IK1vSJIqIBOxk9I1/pE=_2</activeVersionIdentifier>
+    <developerName>KnowledgeArticleDraftGenerator</developerName>
+    <masterLabel>KnowledgeArticleDraftGenerator</masterLabel>
+    <templateVersions>
+        <content>You are a Salesforce Knowledge Base assistant.  
+Your task is to create a professional Knowledge Article draft from the given Case details.  
+
+Requirements:
+- Generate a clear and concise **Title** (7–12 words max).  
+- Generate a well-structured **Body** (with bullet points or numbered steps if applicable).  
+- Keep the tone simple, business-friendly, and support-focused.  
+- Do NOT include personal or confidential data.  
+
+Case Information:
+- Subject: {!$Input:caseSubject}
+- Description: {!$Input:caseDescription}
+- Resolution: {!$Input:caseResolution}(if available)
+
+Output format (JSON):
+{
+ &quot;title&quot;: &quot;&lt;draft title&gt;&quot;,
+ &quot;body&quot;: &quot;&lt;draft body&gt;&quot;
+}
+
+</content>
+        <inputs>
+            <apiName>caseSubject</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>caseSubject</masterLabel>
+            <referenceName>Input:caseSubject</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>caseDescription</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>caseDescription</masterLabel>
+            <referenceName>Input:caseDescription</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>caseResolution</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>caseResolution</masterLabel>
+            <referenceName>Input:caseResolution</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>aRal6kg2uBKbVPzUf8hSm2+5IK1vSJIqIBOxk9I1/pE=_1</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a Salesforce Knowledge Base assistant.  
+Your task is to create a professional Knowledge Article draft from the given Case details.  
+
+Requirements:
+- Generate a clear and concise **Title** (7–12 words max).  
+- Generate a well-structured **Body** (with bullet points).  
+- Keep the tone simple, business-friendly, and support-focused.  
+- Do NOT include personal or confidential data.  
+
+Case Information:
+- Subject: {!$Input:caseSubject}
+- Description: {!$Input:caseDescription}
+- Resolution: {!$Input:caseResolution}(if available)
+
+Output format (JSON):
+{
+ &quot;title&quot;: &quot;&lt;draft title&gt;&quot;,
+ &quot;body&quot;: &quot;&lt;draft body&gt;&quot;
+}
+
+</content>
+        <inputs>
+            <apiName>caseSubject</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>caseSubject</masterLabel>
+            <referenceName>Input:caseSubject</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>caseDescription</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>caseDescription</masterLabel>
+            <referenceName>Input:caseDescription</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>caseResolution</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>caseResolution</masterLabel>
+            <referenceName>Input:caseResolution</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <responseFormat>JSON</responseFormat>
+        <status>Published</status>
+        <versionIdentifier>aRal6kg2uBKbVPzUf8hSm2+5IK1vSJIqIBOxk9I1/pE=_2</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>
