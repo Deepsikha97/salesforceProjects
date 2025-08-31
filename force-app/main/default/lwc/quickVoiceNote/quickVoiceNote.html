@@ -1,0 +1,20 @@
+<template>
+    <lightning-card title="Quick Voice Note" icon-name="utility:record">
+        <div class="slds-p-around_medium">
+            <lightning-button variant="brand" label={recordLabel} onclick={toggleRecording}></lightning-button>
+            <template lwc:if={finalTranscript}>
+                <lightning-button class="slds-m-left_small" variant="neutral" label="Save to Notes"
+                    onclick={saveNote}></lightning-button>
+            </template>
+        </div>
+        <template lwc:if={finalTranscript}>
+            <!-- <p class="slds-m-top_medium">
+				<strong>Transcript:</strong>
+				<span>{finalTranscript}</span>
+				<span style="color: grey">{interimTranscript}</span>
+			</p> -->
+            <lightning-textarea label="Transcript" value={editableTranscript} onchange={handleTranscriptChange}
+                class="slds-m-top_medium"></lightning-textarea>
+        </template>
+    </lightning-card>
+</template>
