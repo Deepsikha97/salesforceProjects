@@ -1,0 +1,106 @@
+<template>
+    <div class="carousel-container" role="region" aria-label="Files carousel">
+        <!-- Left -->
+        <lightning-button-icon icon-name="utility:chevronleft" alternative-text="Previous" onclick={prev}
+            class="nav-btn left"></lightning-button-icon>
+
+        <!-- Preview area -->
+        <div class="file-preview">
+            <template if:true={currentFile}>
+                <!-- IMAGE -->
+                <template if:true={isImage}>
+                    <img src={fileUrl} alt={currentFile.Title} class="preview-content" />
+                </template>
+
+                <!-- PDF -->
+                <template if:true={isPDF}>
+                    <div class="pdf-placeholder">
+                        <img src={displayUrl} alt="PDF thumbnail" />
+                        <button onclick={previewFile}>Click to Preview PDF</button>
+                    </div>
+                </template>
+
+                <!-- VIDEO -->
+                <template if:true={isVideo}>
+                    <video controls class="preview-content">
+                        <source src={fileUrl} />
+                    </video>
+                </template>
+
+                <!-- AUDIO -->
+                <template if:true={isAudio}>
+                    <audio controls class="preview-content">
+                        <source src={fileUrl} />
+                    </audio>
+                </template>
+
+                <!-- OTHER -->
+                <template if:true={isOther}>
+                    <div class="other-file">
+                        <lightning-icon icon-name="doctype:attachment" size="large"></lightning-icon>
+                        <p>{currentFile.Title}.{currentFile.FileExtension}</p>
+                    </div>
+                </template>
+            </template>
+
+            <template if:false={currentFile}>
+                <div class="no-files">No files to preview</div>
+            </template>
+        </div>
+
+        <!-- Right -->
+        <lightning-button-icon icon-name="utility:chevronright" alternative-text="Next" onclick={next}
+            class="nav-btn right"></lightning-button-icon>
+    </div>
+
+    <!-- toolbar -->
+    <div class="toolbar">
+        <lightning-button-icon icon-name="utility:download" alternative-text="Download"
+            onclick={downloadFile}></lightning-button-icon>
+        <lightning-button-icon icon-name="utility:expand" alternative-text="Preview"
+            onclick={previewFile}></lightning-button-icon>
+        <lightning-button-icon icon-name={slideshowIcon} alternative-text="Slideshow"
+            onclick={toggleSlideshow}></lightning-button-icon>
+        <div class="pager" if:true={currentFile}>
+            <span>{pagerText}</span>
+        </div>
+    </div>
+
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- Modal header -->
+                <header class="slds-modal__header">
+                    <lightning-button-icon icon-name="utility:close" class="slds-modal__close"
+                        onclick={closeModal}></lightning-button-icon>
+                    <h2 class="slds-text-heading_medium">{currentFile.Title}</h2>
+                </header>
+
+                <!-- Modal body -->
+                <div class="slds-modal__content slds-p-around_medium">
+                    <template if:true={isImage}>
+                        <img src={fileUrl} alt={currentFile.Title} style="max-width:100%; max-height:80vh;" />
+                    </template>
+                    <template if:true={isPDF}>
+                        <iframe src={fileUrl} style="width:100%; height:80vh;"></iframe>
+                    </template>
+                    <template if:true={isVideo}>
+                        <video controls style="width:100%; max-height:80vh;">
+                            <source src={fileUrl} type="video/mp4" />
+                        </video>
+                    </template>
+                    <template if:true={isAudio}>
+                        <audio controls style="width:100%;">
+                            <source src={fileUrl} type="audio/mpeg" />
+                        </audio>
+                    </template>
+                    <template if:true={isOther}>
+                        <lightning-icon icon-name="doctype:attachment" size="large"></lightning-icon>
+                        <p>{currentFile.Title}.{currentFile.FileExtension}</p>
+                    </template>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

@@ -1,0 +1,17 @@
+<template>
+    <lightning-card title="Attachments Carousel" icon-name="doctype:image">
+        <div class="slds-p-around_medium">
+            <template if:true={files} >
+                <c-file-preview-carousel files={files}></c-file-preview-carousel>
+            </template>
+
+            <template if:true={error}>
+                <div class="slds-text-color_error">Error loading files</div>
+            </template>
+
+            <template if:false={files}>
+                <div>No files found</div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

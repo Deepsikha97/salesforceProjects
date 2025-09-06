@@ -1,0 +1,30 @@
+.carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f4f6f9;
+    padding: 1rem;
+    border-radius: 8px;
+    min-height: 400px;
+}
+
+.file-preview img,
+.file-preview iframe,
+.file-preview video,
+.file-preview audio {
+    max-width: 100%;
+    max-height: 380px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.nav-btn {
+    margin: 0 0.5rem;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    gap: 1rem;
+}
