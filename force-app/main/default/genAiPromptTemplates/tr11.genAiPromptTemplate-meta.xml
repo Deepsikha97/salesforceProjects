@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionIdentifier>aRal6kg2uBKbVPzUf8hSm2+5IK1vSJIqIBOxk9I1/pE=_3</activeVersionIdentifier>
+    <developerName>tr11</developerName>
+    <masterLabel>tr11</masterLabel>
+    <templateVersions>
+        <content>You are an intelligent OCR invoice parser. 
+Your task is to extract structured fields from noisy OCR text.
+
+Extract the following fields and return in JSON only:
+- invoiceNumber
+- invoiceDate (format: yyyy-MM-dd)
+- customerName
+- productName
+- amount (as number in INR)
+
+If a field is missing, return an empty string.
+
+OCR Text:
+{!Input:parseText}
+
+Output JSON:
+{
+ &quot;invoiceNumber&quot;: &quot;&quot;,
+ &quot;invoiceDate&quot;: &quot;&quot;,
+ &quot;customerName&quot;: &quot;&quot;,
+ &quot;productName&quot;: &quot;&quot;,
+ &quot;amount&quot;: &quot;&quot;
+}
+</content>
+        <inputs>
+            <apiName>parseText</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>parseText</masterLabel>
+            <referenceName>Input:parseText</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>aRal6kg2uBKbVPzUf8hSm2+5IK1vSJIqIBOxk9I1/pE=_1</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are an intelligent OCR invoice parser. 
+Your task is to extract structured fields from noisy OCR text. 
+Your task is to extract and return only the structured fields in strict JSON format.
+
+Extract the following fields and return in JSON only:
+- invoiceNumber
+- invoiceDate (format: yyyy-MM-dd)
+- customerName
+- productName
+- amount (as number in INR)
+
+Rules:
+- Return ONLY valid JSON.
+- Do not include any explanations, markdown, or backticks.
+- If a field is missing, return it as null.
+
+OCR Text:
+{!Input:parseText}
+
+Example Output:
+{
+ &quot;invoiceNumber&quot;: &quot;INV-2025-001&quot;,
+ &quot;invoiceDate&quot;: &quot;2025-09-19&quot;,
+ &quot;customerName&quot;: &quot;John Doe&quot;,
+ &quot;productName&quot;: &quot;Wireless Mouse&quot;,
+ &quot;amount&quot;: 1999
+}
+</content>
+        <inputs>
+            <apiName>parseText</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>parseText</masterLabel>
+            <referenceName>Input:parseText</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>aRal6kg2uBKbVPzUf8hSm2+5IK1vSJIqIBOxk9I1/pE=_2</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are an intelligent OCR invoice parser. 
+Your task is to extract structured fields from noisy OCR text. 
+Your task is to extract and return only the structured fields in strict JSON format.
+
+Extract the following fields and return in raw compact JSON only:
+- invoiceNumber
+- invoiceDate (format: yyyy-MM-dd)
+- customerName
+- productName
+- amount (as number in INR)
+
+Rules:
+- Return ONLY valid JSON.
+- Do not include any explanations, markdown, or backticks.
+- If a field is missing, return it as null.
+- Respond with raw compact JSON only,
+no explanations, no markdown, no line breaks:
+
+OCR Text:
+{!Input:parseText}
+
+Example Output:
+{&quot;invoiceNumber&quot;:&quot;...&quot;,&quot;invoiceDate&quot;:&quot;...&quot;,&quot;customerName&quot;:&quot;...&quot;,&quot;productName&quot;:&quot;...&quot;,&quot;amount&quot;:...}
+
+</content>
+        <inputs>
+            <apiName>parseText</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>parseText</masterLabel>
+            <referenceName>Input:parseText</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>aRal6kg2uBKbVPzUf8hSm2+5IK1vSJIqIBOxk9I1/pE=_3</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>

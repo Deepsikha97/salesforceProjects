@@ -1,0 +1,112 @@
+<template>
+    <lightning-button 
+        label="Open Invoice Uploader" 
+        onclick={openModal} 
+        class="slds-m-bottom_small">
+    </lightning-button>
+
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+
+                <!-- Header -->
+                <header class="slds-modal__header">
+                    <lightning-button-icon 
+                        icon-name="utility:close" 
+                        alternative-text="Close" 
+                        class="slds-modal__close" 
+                        onclick={closeModal}>
+                    </lightning-button-icon>
+                    <h2 class="slds-text-heading_medium">Invoice Uploader</h2>
+                </header>
+
+                <!-- Body -->
+                <div class="slds-modal__content slds-p-around_medium">
+
+                    <!-- File Upload -->
+                    <lightning-card>
+                        <lightning-file-upload
+                            label="Upload Invoice"
+                            name="fileUploader"
+                            accept={acceptedFormats}
+                            record-id={recordId}
+                            onuploadfinished={handleUploadFinished}
+                            multiple="false">
+                        </lightning-file-upload>
+
+                        <!-- Error Message -->
+                        <template lwc:if={showErrorMsg}>
+                            <div class="slds-text-color_error slds-m-top_small">{errorMsg}</div>
+                        </template>
+                    </lightning-card>
+
+                    <!-- Editable Extracted Fields -->
+                    <template lwc:if={showOcrText}>
+                        <lightning-card title="Review & Edit Invoice Details" class="slds-m-top_medium">
+                            <div class="slds-p-around_small">
+                                <lightning-input 
+                                    type="text" 
+                                    label="Invoice Number" 
+                                    value={extractedFields.invoiceNumber} 
+                                    onchange={handleFieldChange} 
+                                    data-field="invoiceNumber">
+                                </lightning-input>
+
+                                <lightning-input 
+                                    type="text" 
+                                    label="Amount" 
+                                    value={extractedFields.amount} 
+                                    onchange={handleFieldChange} 
+                                    data-field="amount">
+                                </lightning-input>
+
+                                <lightning-input 
+                                    type="text" 
+                                    label="Customer Name" 
+                                    value={extractedFields.customerName} 
+                                    onchange={handleFieldChange} 
+                                    data-field="customerName">
+                                </lightning-input>
+
+                                <lightning-input 
+                                    type="text" 
+                                    label="Product Name" 
+                                    value={extractedFields.productName} 
+                                    onchange={handleFieldChange} 
+                                    data-field="productName">
+                                </lightning-input>
+
+                                <lightning-input 
+                                    type="date" 
+                                    label="Invoice Date" 
+                                    value={extractedFields.invoiceDate} 
+                                    onchange={handleFieldChange} 
+                                    data-field="invoiceDate">
+                                </lightning-input>
+                            </div>
+                        </lightning-card>
+                    </template>
+                </div>
+
+                <!-- Footer -->
+                <footer class="slds-modal__footer">
+                    <lightning-button 
+                        variant="neutral" 
+                        label="Close" 
+                        onclick={closeModal}>
+                    </lightning-button>
+                    <template if:true={extractedFields}>
+                        <lightning-button 
+                            variant="brand" 
+                            label="Save Expense" 
+                            onclick={handleSave}>
+                        </lightning-button>
+                    </template>
+                </footer>
+            </div>
+        </section>
+
+        <!-- Backdrop -->
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

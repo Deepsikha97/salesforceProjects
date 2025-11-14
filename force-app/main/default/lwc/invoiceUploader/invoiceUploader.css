@@ -1,0 +1,10 @@
+:host {
+    /* ensure modal sits above other page content when open */
+}
+
+/* no heavy styling needed — SLDS provides modal styles */
+
+/* keep backdrop full screen */
+.slds-backdrop_open {
+    position: fixed;
+}
