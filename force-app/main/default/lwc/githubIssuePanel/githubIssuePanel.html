@@ -1,0 +1,30 @@
+<template>
+	<lightning-card title="GitHub Issue Panel">
+		<div class="slds-p-around_small">
+			<template lwc:if={issueLinked}>
+				<p>
+					<b>Issue:</b>
+					<a href={issueUrl} target="_blank"> #{issueTitle} - {issueNumber} </a>
+				</p>
+				<p><b>Github Case Status:</b> {issueState}</p>
+				<lightning-button
+					label="Refresh from GitHub"
+					variant="neutral"
+					onclick={handleRefresh}
+					class="slds-m-top_small"
+				>
+				</lightning-button>
+			</template>
+			<template lwc:else>
+				<p>No GitHub issue linked yet.</p>
+				<lightning-button
+					variant="brand"
+					label="Create GitHub Issue"
+					class="slds-m-top_small"
+					onclick={handleCreate}
+				>
+				</lightning-button>
+			</template>
+		</div>
+	</lightning-card>
+</template>
