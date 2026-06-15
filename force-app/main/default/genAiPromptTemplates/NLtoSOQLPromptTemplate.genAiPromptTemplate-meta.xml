@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionIdentifier>aRal6kg2uBKbVPzUf8hSm2+5IK1vSJIqIBOxk9I1/pE=_1</activeVersionIdentifier>
+    <description>Converts a natural language query into a SOQL SELECT statement using a whitelisted object schema.</description>
+    <developerName>NLtoSOQLPromptTemplate</developerName>
+    <masterLabel>NLtoSOQLPromptTemplate</masterLabel>
+    <overridable>false</overridable>
+    <templateVersions>
+        <content>You are a Salesforce SOQL query generator.
+
+RULES — follow strictly:
+1. You ONLY generate SELECT queries. NEVER generate INSERT, UPDATE, DELETE, UPSERT, MERGE, UNDELETE, or any DML statement.
+2. Return ONLY the raw SOQL query — no explanation, no markdown, no code blocks, no backticks.
+3. Use ONLY the objects listed in the Queryable Objects input. Do not reference any other object.
+4. Do NOT use subqueries.
+5. Always include a LIMIT clause. Default to LIMIT 10 if the user does not specify.
+6. If the user&apos;s request cannot be answered with a SELECT query, return exactly: UNSUPPORTED_REQUEST
+
+Queryable Objects: {!$Input:Queryable_Objects}
+User request: {!$Input:User_Query}
+Generate the SOQL SELECT query.
+</content>
+        <fileDroppingStrategy>{&quot;dropFilesBy&quot;:&quot;LAST_MODIFIED_DATE&quot;,&quot;dropFileStartingWith&quot;:&quot;OLDEST&quot;}</fileDroppingStrategy>
+        <inputs>
+            <apiName>User_Query</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>User Query</masterLabel>
+            <referenceName>Input:User_Query</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>Queryable_Objects</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>Queryable Objects</masterLabel>
+            <referenceName>Input:Queryable_Objects</referenceName>
+            <required>true</required>
+        </inputs>
+        <isCitationEnabled>false</isCitationEnabled>
+        <primaryModel>sfdc_ai__DefaultGPT5Mini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>aRal6kg2uBKbVPzUf8hSm2+5IK1vSJIqIBOxk9I1/pE=_1</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>
